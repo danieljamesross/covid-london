@@ -1,0 +1,16 @@
+(defun read-from-file (file)
+;;; ****
+  (with-open-file
+      (stream file :direction :input :if-does-not-exist :error)
+    (read stream)))
+
+(defun write-to-file (file data)
+;;; ****
+  (with-open-file
+      (stream file :direction :output :if-exists :supersede
+              :if-does-not-exist :create)
+    (print data stream)))
+
+(defun csv-to-json(file)
+  (let ((csv (read-from-file file)))
+  )
