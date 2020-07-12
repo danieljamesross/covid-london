@@ -13,3 +13,12 @@ svg .borough:hover {
     fill-opacity: 0.6;
     cursor: pointer;
 }
+
+.label {
+    font-size: 24pt;
+    background-color: white;
+}
+
+.button {
+    text-align: center;
+}

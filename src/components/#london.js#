@@ -71,11 +71,8 @@ function London(covidData) {
 		setSelectedBorough(selectedBorough === feature ? null : feature);
 	    })
 	    .attr("class", "borough")
-	/* .attr("fill", "palevioletred") */
 	    .attr("stroke", "black")
 	    .attr("stroke-width", "2")
-	/* .transition()
-	   .attr("fill", feature => getColor(feature)) */
 	    .attr("d", feature => pathGenerator(feature));
 
 	// render text
