@@ -26,6 +26,7 @@ function London(covidData) {
 	    setDomain([1, 10, 20, 30, 40, 50]);//48
 	else setDomain([1, 50, 100, 500, 1000, 1300]);//1482
     },[dataType]);
+    
     useEffect(() => {
 	const svg = select(svgRef.current);
 	const colorScale = scaleThreshold()

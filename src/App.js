@@ -27,14 +27,15 @@ function App() {
     const [value,setValue] = useState(0);
     const handleChange = (val) => {
 	setValue(val);
-	setDisplayDate();
     };
     const [dataDate,setDataDate] = useState("2020-03-30");
-    const setDisplayDate = () =>
+
+    useEffect(() => {
 	dispatch({type: SET_DISPLAY_DATE,
 		  displayDate: new Date(dataDate).toLocaleDateString(
 		      "en-GB", {day: "numeric", month: "long"}
-	)});
+		  )})
+	},[dataDate])
 
     useEffect(() => {
 	const addDays = (date, days) => {
@@ -58,7 +59,7 @@ function App() {
 	    return dispatch({type: SET_DATA_TYPE, dataType: "total_cases"});
 	} return dispatch({type: SET_DATA_TYPE, dataType: "new_cases"});
     };
- 
+    
     const dataDisplay = () => {
 	if (dataType === "new_cases") {
 	    return "Number of new cases per day";

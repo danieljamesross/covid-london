@@ -1,5 +1,6 @@
 {
-  "name": "covid-london",
+    "name": "covid-london",
+  "homepage": "http://www.doc.gold.ac.uk/~dross011/covid-london/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
