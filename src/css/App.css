@@ -1,0 +1,75 @@
+body {
+    text-align: center;
+    background-color: #023754;
+    color: #B8ADA9;
+}
+
+.App {
+    min-width: 700px;
+}
+
+
+svg {
+    display: block;
+    width: 100%;
+    min-height: 500px;
+}
+
+svg .borough:hover {
+    fill-opacity: 0.95;
+    cursor: pointer;
+}
+
+.date-slider {
+    padding:10px 100px;
+}
+.side-matter {
+    width: 300px;
+    position: absolute;
+    margin-left: 10px;
+    top:15%;
+}
+
+button {
+    text-align: center;
+    border: none;
+    padding: 8px;
+    font-size: 12pt;
+    background-color: #77CFFF;
+    position: relative;
+    margin-bottom: 10px;
+}
+button:hover{
+    opacity: 0.8;
+}
+
+.results, button, ul, ol {
+    display: block;
+    float: left;
+
+}
+
+p {
+    text-align: left;
+    text-indent: nil;
+}
+
+ul,ol {
+    margin-top: -10px;
+    /* padding: 10px 10px 10px 12px; */
+    /* margin-bottom: 0px; */
+}
+
+.results {
+    text-align: left;
+    font-size: 14pt;
+    width: 400px;
+    position: absolute;
+    top:55%;
+    margin-left: 10px;
+    margin-top: 0px;
+}
+
+.labels {
+    margin-top:10px;
+}
