@@ -20,14 +20,27 @@ svg .borough:hover {
     cursor: pointer;
 }
 
+.legend {
+    display: inline-block;
+    left: 70%;
+    margin-left: 400px;
+    color: #B8ADA9;
+    font-size:12pt;
+}
+
+.legend-title {
+    font-weight: bold;
+}
+
 .date-slider {
     padding:10px 100px;
 }
 .side-matter {
     width: 300px;
     position: absolute;
-    margin-left: 10px;
     top:15%;
+    background-color: rgba(2, 55, 84, 0.7);
+    padding: 0px 20px 0px 20px;
 }
 
 button {
@@ -54,7 +67,8 @@ p {
 }
 
 ul,ol {
-    margin-top: -10px;
+    margin: -10px 0px 10px -20px;
+    text-align: left;
     /* padding: 10px 10px 10px 12px; */
     /* margin-bottom: 0px; */
 }
@@ -62,13 +76,36 @@ ul,ol {
 .results {
     text-align: left;
     font-size: 14pt;
-    width: 400px;
     position: absolute;
-    top:55%;
-    margin-left: 10px;
-    margin-top: 0px;
+    padding: 0px 20px 0px 20px;
+    top:50%;
+    left:75%;
+    background-color: rgba(2, 55, 84, 0.7);
+}
+
+.results-borough {
+    text-align: left;
+    font-size: 14pt;
+    position: absolute;
+    padding: 0px 20px 0px 20px;
+    top: -10%;
+    bottom: 0;
+    left: 40%;
+    right: 0;
+    width: 200px;
+    height: 180px;
+    margin: auto;
+    background-color: rgba(2, 55, 84, 0.7);
 }
 
 .labels {
     margin-top:10px;
+}
+
+.data-type {
+    margin-top: 40px;
+}
+
+.data-type-title {
+    font-weight: bold;
 }

@@ -95,20 +95,24 @@ function App() {
 		<h3>An interactive map of Covid-19 cases in London </h3>
 		<CovidContext.Provider value={{state, dispatch}}>
 		    <div className="side-matter">
-			<p>This map has two display modes:</p>
-			<ol>
-			    <li>Total number of cases of Covid-19 per borough, over the time frame.</li>
-			    <li>Number of new cases of Covid-19 per borough, per day</li>
-			</ol>
-			<p>Click the button below to change the view.</p>
-			<button
-			    onClick={setDataType}
-			>{dataDisplay()}
-			</button>
+			<p>Click this button to automatically show the changing data:</p>
 			<button
 			    onClick={toggleAuto}
 			>Auto Play
 			</button>
+			<br />&nbsp;<br />
+	<p>This map has two display modes:</p>
+	<ol>
+	    <li>Total number of cases of Covid-19 per borough, over the time frame.</li>
+	    <li>Number of new cases of Covid-19 per borough, per day</li>
+	</ol>
+	<p className="data-type">Currently displaying:</p>
+	<p className="data-title">{dataDisplay()}</p>
+	<button
+	    onClick={setDataType}
+	>Change Data
+	</button>
+	
 		    </div>
 		    <div className="map">
 			<London covidData={arr} />
