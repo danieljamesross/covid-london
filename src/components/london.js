@@ -21,7 +21,7 @@ function London(covidData) {
     const [newCases, setNewCases] = useState(0);
     const [totalCases, setTotalCases] = useState(0);
     const [boroughName, setBoroughName] = useState("Greater London");
-    const [domain, setDomain] = useState([1, 10, 20, 30, 40, 50]);
+    const [domain, setDomain] = useState([0, 1, 50]);
     const [margin, setMargin] = useState("results");
     const [transform, setTransform ] = useState("translate(1100,0)");
     
