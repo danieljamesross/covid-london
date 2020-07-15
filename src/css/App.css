@@ -15,8 +15,12 @@ body {
 svg {
     display: block;
     width: 100%;
-    min-height: 300px;
-    height: 500px;
+    min-height: 400px;
+    height: 100%;
+}
+
+map {
+    height: 700px;
 }
 
 svg .borough:hover {
@@ -47,7 +51,7 @@ svg .borough:hover {
     width:120px;
     position: absolute;
     display: block;
-    top:15%;
+    top: 1rem;
     background-color: rgba(2, 55, 84, 0.7);
     padding: 0px 20px 0px 20px;
 }
@@ -64,11 +68,15 @@ button {
     width: 130px;
     display: block;
 }
-button:hover,active{
+button:hover{
     opacity: 0.8;
 }
+button:active{
+    background-color: #FFBD6F;
+    opacity: 1;
+}
 
-.results, button, ul, ol {
+.results, ul, ol {
     display: block;
     float: left;
 
@@ -87,9 +95,13 @@ ul,ol {
     text-align: left;
     font-size: 12pt;
     position: absolute;
-    padding: 0px 20px 0px 20px;
-    top:55%;
-    left:65%;
+    padding: 10px 20px 10px 20px;
+    top:0;
+    bottom: 0;
+    height:180px;
+    width: 200px;
+    left:10%;
+    margin: auto;
     background-color: rgba(2, 55, 84, 0.7);
     border-radius: 12px;
 }
@@ -97,7 +109,7 @@ ul,ol {
 .results-borough {
     font-size: 14pt;
     position: absolute;
-    padding: 0px 20px 0px 20px;
+    padding: 10px 20px 10px 20px;
     top: 0;
     bottom: 0;
     left: 0;
@@ -105,7 +117,7 @@ ul,ol {
     width: 200px;
     height: 180px;
     margin: auto;
-    background-color: rgba(2, 55, 84, 0.8);
+    background-color: rgba(2, 55, 84, 0.9);
     border-radius: 24px;
 }
 
@@ -130,13 +142,25 @@ ul,ol {
 
 .info {
     display: block;
-    width: 300px;
     position: absolute;
-    top: 180px;
-    left: 20px;
+    padding: 10px 20px;
+    width: 340px;
+    height: 400px;
+    top: 0;
+    left: 0;
     right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(2, 55, 84, 0.9);
+    border-radius: 24px;
+    text-align: center;
+    z-index:2;
 }
 
 .info-hide {
     display: none;
+}
+
+.noBlock {
+    display: inline-block;
 }

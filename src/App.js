@@ -5,7 +5,7 @@ import londonCovidData from './data/londonCovidData';
 import SliderOptions from './components/SliderOptions';
 
 import {
-    SET_DATA_TYPE, SET_DISPLAY_DATE, TOGGLE_AUTO
+    SET_DATA_TYPE, SET_DISPLAY_DATE, TOGGLE_AUTO, RESET, SET_SELECTED_BOROUGH
 } from './reducers/Types.js';
 import CovidReducer from './reducers/CovidReducer';
 import CovidContext from './context/CovidContext';
@@ -16,10 +16,11 @@ function App() {
     const initialState = {
 	dataType: "total_cases",
 	displayDate: "31 January",
-	autoPlay: false
+	autoPlay: false,
+	selectedBorough: null,
     };
     const [ state, dispatch ] = useReducer(CovidReducer, initialState);
-    const { dataType, autoPlay } = state;
+    const { dataType, autoPlay, selectedBorough } = state;
     const [info, setInfo] = useState("info-hide");
 
     const toggleInfo = () => {
@@ -28,6 +29,14 @@ function App() {
 		return "info-hide";
 	    return "info";});
     };
+
+    const hideInfo = () => {
+	setInfo("info-hide");
+    }
+    useEffect(() => {
+	if (selectedBorough)
+	    setInfo("info-hide");
+    },[selectedBorough])
     
     const minDate = new Date("2020-01-30");
 
@@ -80,8 +89,10 @@ function App() {
 
     const reset = () => {
 	setValue(1);
+	setInfo("info-hide");
+	dispatch({type: SET_SELECTED_BOROUGH, selectedBorough: null});
 	if (autoPlay)
-	    dispatch({type: TOGGLE_AUTO});
+	    dispatch({type: RESET});
 	return null;
     };
 
@@ -109,7 +120,7 @@ function App() {
 		    <div className="side-matter">
 			<button
 			    onClick={toggleAuto}>
-			Play / Pause
+			    Play / Pause
 			</button>
 			<button
 			    onClick={reset}
@@ -118,25 +129,24 @@ function App() {
 			<button
 			    onClick={toggleInfo}
 			>Info
-			</button>
-			<br />
-			<div className={info}>
-			    <p>This map has two display modes:</p>
-			    <ol>
-				<li>Total number of cases of Covid-19 per borough, over the time frame.</li>
-				<li>Number of new cases of Covid-19 per borough, per day.</li>
-			    </ol>
-			    <p>Click the "Change Data" button to see the different display modes</p>
-			    <p>Click on a borough to zoom in.</p>
-			    <div className="data-type">
-				<p>Currently displaying:</p>
-				<p><span className="bold">{dataDisplay()}</span></p>
-			    </div>
-
-			</div>
+			</button>		
 			<button
 			    onClick={setDataType}
 			>Change Data
+			</button>
+		    </div>
+		    <div className={info}>
+			<p>This map has two display modes:</p>
+			<ol>
+			    <li>Total number of cases of Covid-19 per borough, over the time frame.</li>
+			    <li>Number of new cases of Covid-19 per borough, per day.</li>
+			</ol>
+			<p>Click the "Change Data" button to see the different display modes</p>
+			<p>Click on a borough to zoom in.</p>
+			<h3>Currently displaying:</h3>
+			<h2>{dataDisplay()}</h2>
+			<button onClick={hideInfo} className="noBlock">
+			    Close
 			</button>
 		    </div>
 		    <div className="map">

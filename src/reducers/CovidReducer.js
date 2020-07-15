@@ -1,7 +1,9 @@
 import {
     SET_DATA_TYPE,
     SET_DISPLAY_DATE,
-    TOGGLE_AUTO
+    TOGGLE_AUTO,
+    SET_SELECTED_BOROUGH,
+    RESET
 } from './Types.js';
 
 function CovidReducer(state, action) {
@@ -20,6 +22,17 @@ function CovidReducer(state, action) {
 	return {
 	    ...state,
 	    autoPlay: !state.autoPlay
+	};
+    case SET_SELECTED_BOROUGH:
+	return {
+	    ...state,
+	    selectedBorough: action.selectedBorough
+	};
+    case RESET:
+	return {
+	    ...state,
+	    autoPlay: false,
+	    selectedBorough: null,
 	};
 	default:
 	    return state;
