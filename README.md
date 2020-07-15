@@ -1,8 +1,12 @@
+# Covid in London
+## An interactive map of Covid-19 cases in London.
+See the app here on [Netlify](https://gallant-fermi-0891fd.netlify.app/).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
-In the project directory, you can run:
+Download the repo and in the project directory, you can run:
 
 ### `yarn start`
 
