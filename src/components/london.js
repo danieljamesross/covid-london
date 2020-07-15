@@ -75,6 +75,10 @@ function London(covidData) {
     
     useEffect(() => {
 	const boroughId = selectedBorough ? selectedBorough.properties["GSS_CODE"] :  null;
+	// use resized dimensions
+	// but fall back to getBoundingClientRect, if no dimensions yet.
+	const { width } =
+	    dimensions || wrapperRef.current.getBoundingClientRect();
 	if (boroughId) {
 	    covidData.covidData.map(item => {
 		if (item["area_code"] === boroughId){
@@ -84,7 +88,6 @@ function London(covidData) {
 		    setMargin("results-borough");
 		    setHighestStats("highestStats-hidden");
 		};
-		setTransform("translate(400,200)");
 		return null;
 	    });
 	} else {
@@ -93,14 +96,14 @@ function London(covidData) {
 	    setTotalCases(0);
 	    setMargin("results");
 	    setHighestStats("highestStats");
-	    setTransform("translate(1100,0)");
+	    setTransform("translate(" + width/1.3 + ", 0)");
 	    covidData.covidData.map(item => {
 		setNewCases(c => c + item["new_cases"]);
 		setTotalCases(c => c + item["total_cases"]);		    
 		return null;
 	    });
 	}
-    }, [selectedBorough, covidData, boroughName]);
+    }, [selectedBorough, covidData, boroughName, wrapperRef, dimensions]);
     // will be called initially and on every data change
     useEffect(() => {
 	const svg = select(svgRef.current);
@@ -225,23 +228,23 @@ function London(covidData) {
     );
     return (
 	<>
-	  <div ref={wrapperRef}
-	       style={{ marginBottom: "2rem", marginTop: "2rem" }}
-	       >
-	    <svg ref={svgRef}></svg>
-	  </div>
-	  <div className={margin}>
-	    <h3>{boroughName}</h3>
-	    <ul>
-	      <li>Date: <span className="bold">{displayDate}</span></li>
-	      <li>New Cases:  <span className="bold">{newCases}</span></li>
-	      <li>Total Cases:  <span className="bold">{totalCases}</span></li>
-	      <span className={highestStats}>
-		{showHighestNew()}
-		{showHighestTotal()}
-	      </span>
-	    </ul>
-	  </div>
+	    <div ref={wrapperRef}
+		 style={{ marginBottom: "2rem", marginTop: "2rem" }}
+	    >
+		<svg ref={svgRef}></svg>
+	    </div>
+	    <div className={margin}>
+		<h3>{boroughName}</h3>
+		<ul>
+		    <li>Date: <span className="bold">{displayDate}</span></li>
+		    <li>New Cases:  <span className="bold">{newCases}</span></li>
+		    <li>Total Cases:  <span className="bold">{totalCases}</span></li>
+		    <span className={highestStats}>
+			{showHighestNew()}
+			{showHighestTotal()}
+		    </span>
+		</ul>
+	    </div>
 	</>
     );
 };

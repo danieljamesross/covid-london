@@ -91,21 +91,22 @@ ul,ol {
     top:55%;
     left:65%;
     background-color: rgba(2, 55, 84, 0.7);
+    border-radius: 12px;
 }
 
 .results-borough {
-    text-align: left;
     font-size: 14pt;
     position: absolute;
     padding: 0px 20px 0px 20px;
-    top: -10%;
+    top: 0;
     bottom: 0;
-    left: 35%;
+    left: 0;
     right: 0;
     width: 200px;
     height: 180px;
     margin: auto;
-    background-color: rgba(2, 55, 84, 0.7);
+    background-color: rgba(2, 55, 84, 0.8);
+    border-radius: 24px;
 }
 
 .highestStats {
