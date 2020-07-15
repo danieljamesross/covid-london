@@ -21,16 +21,57 @@ function London(covidData) {
     const [newCases, setNewCases] = useState(0);
     const [totalCases, setTotalCases] = useState(0);
     const [boroughName, setBoroughName] = useState("Greater London");
-    const [domain, setDomain] = useState([0, 1, 50]);
+    const [domain, setDomain] = useState([0, 1, 60]);
     const [margin, setMargin] = useState("results");
+    const [highestStats, setHighestStats] = useState("highestStats");
     const [transform, setTransform ] = useState("translate(1100,0)");
+    const [highestNew, setHighestNew] = useState(0);
+    const [highestTotal, setHighestTotal] = useState(0);
+    const [highestNewBorough, setHighestNewBorough] = useState(null);
+    const [highestTotalBorough, setHighestTotalBorough] = useState(null);
     
     useEffect(() => {
 	if (dataType === "new_cases")
-	    setDomain([0, 1, 50]);//48
-	else setDomain([0, 1, 1500]);//1482
+	    setDomain([0, 1, 60]);//55
+	else setDomain([0, 1, 1600]);//1514
     },[dataType]);
-    
+
+    useEffect(() => {
+	setHighestNew(0);
+	setHighestTotal(0);
+	setHighestNewBorough(null);
+	setHighestTotalBorough(null);
+	covidData.covidData.map(item => {
+	    setHighestNew(c => {
+		setHighestNewBorough(d => {
+		    if (c > item["new_cases"])
+			return d;
+		    return item["area_name"];
+		});
+		return Math.max(c, item["new_cases"]);
+	    });
+	    setHighestTotal(c => {
+		setHighestTotalBorough(d => {
+		    if (c > item["total_cases"])
+			return d;
+		    return item["area_name"];
+		});
+		return Math.max(c, item["total_cases"]);
+	    });
+	    return null;
+	});
+    },[covidData]);
+
+    const showHighestNew = () => {
+	if (highestNew > 0)
+	    return (<li>Highest no. new cases is <span className="bold">{highestNew}</span> in <span className="bold">{highestNewBorough}</span></li>);
+	return null;
+    };
+
+    const showHighestTotal = () => {
+	if (highestTotal <= 0) return null;
+	return (<li>Highest no. total cases is <span className="bold">{highestTotal}</span> in  <span className="bold">{highestTotalBorough}</span></li>);
+    };
     
     useEffect(() => {
 	const boroughId = selectedBorough ? selectedBorough.properties["GSS_CODE"] :  null;
@@ -41,6 +82,7 @@ function London(covidData) {
 		    setTotalCases(item["total_cases"]);
 		    setBoroughName(item["area_name"]);
 		    setMargin("results-borough");
+		    setHighestStats("highestStats-hidden");
 		};
 		setTransform("translate(400,200)");
 		return null;
@@ -50,7 +92,7 @@ function London(covidData) {
 	    setNewCases(0);
 	    setTotalCases(0);
 	    setMargin("results");
-
+	    setHighestStats("highestStats");
 	    setTransform("translate(1100,0)");
 	    covidData.covidData.map(item => {
 		setNewCases(c => c + item["new_cases"]);
@@ -119,9 +161,20 @@ function London(covidData) {
 	};
 	const getLegendTitle = () => {
 	    if (dataType === "new_cases")
-		return "No. New Cases"
+		return "No. New Cases";
 	    return "No. Total Cases";
-	}
+	};
+
+	const cellNum = () => {
+	    if (dataType === "new_cases")
+		return 7;
+	    return 17;
+	};
+	const getY = () => {
+	    if (dataType === "new_cases")
+		return 130;
+	    return 280;
+	};
 	// add color to the features
 	svg.selectAll(".borough")
 	   .transition()
@@ -140,14 +193,14 @@ function London(covidData) {
 	   .attr("fill", "#023754")
 	   .attr("x",-10)
            .attr("y", -10)
-	   .attr("width", 200)
-	   .attr("height", 230);
+	   .attr("width", 160)
+	   .attr("height", getY() + 20);
 	
 	
 	// define the legend
 	const legend = legendColor()
 	    .shapeWidth(20)
-	    .cells(11)
+	    .cells(cellNum())
 	    .labelFormat(format("0"))
 	    .orient('vertical')
 	    .ascending(true)
@@ -158,36 +211,39 @@ function London(covidData) {
 	svg.select(".legend")
 	   .call(legend);
 
-	//remove any egend title
+	//remove any legend title
 	svg.select(".legend-title").remove();
 	//add new legend title
 	svg.select(".legend")
 	   .append("text")
 	   .attr("class", "legend-title")
 	   .attr("x", 0)
-	   .attr("y", 200)
-	   .attr("font-size", 24)
+	   .attr("y", getY())
+	   .attr("font-size", 18)
 	   .text(getLegendTitle());
     }, [covidData, dataType, domain, transform]
     );
     return (
 	<>
-	    <div ref={wrapperRef} style={{ marginBottom: "2rem", marginTop: "2rem" }}
-	    >
-		<svg ref={svgRef}></svg>
-	    </div>
-	    <div className={margin}>
-		<h3>{boroughName}</h3>
-		<ul>
-		    <li>Date: {displayDate}</li>
-		    <li>New Cases: {newCases}</li>
-		    <li>Total Cases: {totalCases}</li>
-
-		</ul>
-	    </div>
+	  <div ref={wrapperRef}
+	       style={{ marginBottom: "2rem", marginTop: "2rem" }}
+	       >
+	    <svg ref={svgRef}></svg>
+	  </div>
+	  <div className={margin}>
+	    <h3>{boroughName}</h3>
+	    <ul>
+	      <li>Date: <span className="bold">{displayDate}</span></li>
+	      <li>New Cases:  <span className="bold">{newCases}</span></li>
+	      <li>Total Cases:  <span className="bold">{totalCases}</span></li>
+	      <span className={highestStats}>
+		{showHighestNew()}
+		{showHighestTotal()}
+	      </span>
+	    </ul>
+	  </div>
 	</>
     );
-}   
-
+};
 
 export default London;

@@ -97,5 +97,5 @@
   cursor: pointer;
   display: inline-block;
   top: 20px;
-  transform: translate3d(-50%, 0, 0);
+  transform: translate3d(30%, 0, 0);
 }

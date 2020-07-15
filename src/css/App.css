@@ -8,11 +8,15 @@ body {
     min-width: 700px;
 }
 
+.bold {
+    font-weight: bold;
+}
 
 svg {
     display: block;
     width: 100%;
-    min-height: 500px;
+    min-height: 300px;
+    height: 500px;
 }
 
 svg .borough:hover {
@@ -21,11 +25,12 @@ svg .borough:hover {
 }
 
 .legend {
-    display: inline-block;
+    display: block;
+    position: relative;
     left: 70%;
     margin-left: 400px;
     color: #B8ADA9;
-    font-size:12pt;
+    font-size: 12pt;
 }
 
 .legend-title {
@@ -34,10 +39,14 @@ svg .borough:hover {
 
 .date-slider {
     padding:10px 100px;
+    position: absolute;
+    top:80%;
+    width:80%;
 }
 .side-matter {
-    width: 300px;
+    width:120px;
     position: absolute;
+    display: block;
     top:15%;
     background-color: rgba(2, 55, 84, 0.7);
     padding: 0px 20px 0px 20px;
@@ -45,14 +54,17 @@ svg .borough:hover {
 
 button {
     text-align: center;
+    text-transform: uppercase;
     border: none;
     padding: 8px;
     font-size: 12pt;
     background-color: #77CFFF;
     position: relative;
     margin-bottom: 10px;
+    width: 130px;
+    display: block;
 }
-button:hover{
+button:hover,active{
     opacity: 0.8;
 }
 
@@ -69,17 +81,15 @@ p {
 ul,ol {
     margin: -10px 0px 10px -20px;
     text-align: left;
-    /* padding: 10px 10px 10px 12px; */
-    /* margin-bottom: 0px; */
 }
 
 .results {
     text-align: left;
-    font-size: 14pt;
+    font-size: 12pt;
     position: absolute;
     padding: 0px 20px 0px 20px;
-    top:50%;
-    left:75%;
+    top:55%;
+    left:65%;
     background-color: rgba(2, 55, 84, 0.7);
 }
 
@@ -90,7 +100,7 @@ ul,ol {
     padding: 0px 20px 0px 20px;
     top: -10%;
     bottom: 0;
-    left: 40%;
+    left: 35%;
     right: 0;
     width: 200px;
     height: 180px;
@@ -98,14 +108,34 @@ ul,ol {
     background-color: rgba(2, 55, 84, 0.7);
 }
 
+.highestStats {
+    display: block;
+}
+.highestStats-hidden {
+    display: none;
+}
+
 .labels {
     margin-top:10px;
 }
 
 .data-type {
-    margin-top: 40px;
+   padding-top: 10px;
 }
 
 .data-type-title {
     font-weight: bold;
+}
+
+.info {
+    display: block;
+    width: 300px;
+    position: absolute;
+    top: 180px;
+    left: 20px;
+    right: 0;
+}
+
+.info-hide {
+    display: none;
 }

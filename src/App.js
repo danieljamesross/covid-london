@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer } from 'react';
 import Slider from 'react-rangeslider';
 import London from './components/london';
 import londonCovidData from './data/londonCovidData';
-import SliderOptions from './components/SliderOptions'
+import SliderOptions from './components/SliderOptions';
 
 import {
     SET_DATA_TYPE, SET_DISPLAY_DATE, TOGGLE_AUTO
@@ -20,22 +20,29 @@ function App() {
     };
     const [ state, dispatch ] = useReducer(CovidReducer, initialState);
     const { dataType, autoPlay } = state;
+    const [info, setInfo] = useState("info-hide");
+
+    const toggleInfo = () => {
+	setInfo(e => {
+	    if (e === "info")
+		return "info-hide";
+	    return "info";});
+    };
     
     const minDate = new Date("2020-01-30");
-    /* const maxDate = Date.parse("2020-06-06"); */
 
     const [value,setValue] = useState(0);
     const handleChange = (val) => {
 	setValue(val);
     };
-    const [dataDate,setDataDate] = useState("2020-03-30");
+    const [dataDate,setDataDate] = useState("2020-01-30");
 
     useEffect(() => {
 	dispatch({type: SET_DISPLAY_DATE,
 		  displayDate: new Date(dataDate).toLocaleDateString(
 		      "en-GB", {day: "numeric", month: "long"}
-		  )})
-	},[dataDate])
+	)});
+    },[dataDate]);
 
     useEffect(() => {
 	const addDays = (date, days) => {
@@ -68,16 +75,21 @@ function App() {
 
     const toggleAuto = () => {
 	return dispatch({type: TOGGLE_AUTO});
-    }
+    };
+
+
+    const reset = () => {
+	setValue(1);
+	if (autoPlay)
+	    dispatch({type: TOGGLE_AUTO});
+	return null;
+    };
 
     useEffect(() => {
 	if (autoPlay) {
-	    setValue(1);
 	    const id = setInterval(() => {
 		setValue(c => c + 1);
-	    }, 80);
-	    
-	    
+	    }, 200);
 	    return () => clearInterval(id);
 	}
     }, [autoPlay]);
@@ -86,7 +98,7 @@ function App() {
 	if (value >= 128){
 	    return dispatch({type: TOGGLE_AUTO});
 	}
-    }, [value])
+    }, [value]);
     
     return (
 	<React.Fragment>
@@ -95,24 +107,37 @@ function App() {
 		<h3>An interactive map of Covid-19 cases in London </h3>
 		<CovidContext.Provider value={{state, dispatch}}>
 		    <div className="side-matter">
-			<p>Click this button to automatically show the changing data:</p>
 			<button
-			    onClick={toggleAuto}
-			>Auto Play
+			    onClick={toggleAuto}>
+			Play / Pause
 			</button>
-			<br />&nbsp;<br />
-	<p>This map has two display modes:</p>
-	<ol>
-	    <li>Total number of cases of Covid-19 per borough, over the time frame.</li>
-	    <li>Number of new cases of Covid-19 per borough, per day</li>
-	</ol>
-	<p className="data-type">Currently displaying:</p>
-	<p className="data-title">{dataDisplay()}</p>
-	<button
-	    onClick={setDataType}
-	>Change Data
-	</button>
-	
+			<button
+			    onClick={reset}
+			>Reset
+			</button>
+			<button
+			    onClick={toggleInfo}
+			>Info
+			</button>
+			<br />
+			<div className={info}>
+			    <p>This map has two display modes:</p>
+			    <ol>
+				<li>Total number of cases of Covid-19 per borough, over the time frame.</li>
+				<li>Number of new cases of Covid-19 per borough, per day.</li>
+			    </ol>
+			    <p>Click the "Change Data" button to see the different display modes</p>
+			    <p>Click on a borough to zoom in.</p>
+			    <div className="data-type">
+				<p>Currently displaying:</p>
+				<p><span className="bold">{dataDisplay()}</span></p>
+			    </div>
+
+			</div>
+			<button
+			    onClick={setDataType}
+			>Change Data
+			</button>
 		    </div>
 		    <div className="map">
 			<London covidData={arr} />
@@ -120,8 +145,8 @@ function App() {
 		    <div className="date-slider">
 			<Slider
 			min={1}
-			max={128}
-			value={value}
+ 			max={128}
+ 			value={value}
 			tooltip={false}
 			onChange={(e) => handleChange(e)}
 			labels={SliderOptions.labels}
@@ -131,6 +156,6 @@ function App() {
 	    </div>
 	</React.Fragment>
     );
-}
+};
 
 export default App;
