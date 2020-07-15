@@ -5,7 +5,7 @@ body {
 }
 
 .App {
-    min-width: 700px;
+    min-width: 800px;
 }
 
 .bold {
@@ -15,12 +15,12 @@ body {
 svg {
     display: block;
     width: 100%;
-    min-height: 400px;
+    min-height: 500px;
     height: 100%;
 }
 
 map {
-    height: 700px;
+    height: 800px;
 }
 
 svg .borough:hover {
@@ -145,7 +145,7 @@ ul,ol {
     position: absolute;
     padding: 10px 20px;
     width: 340px;
-    height: 400px;
+    height: 300px;
     top: 0;
     left: 0;
     right: 0;
