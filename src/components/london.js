@@ -18,7 +18,6 @@ function London(covidData) {
     const svgRef = useRef();
     const wrapperRef = useRef();
     const dimensions = useResizeObserver(wrapperRef);
-    // const [selectedBorough, setSelectedBorough] = useState(null);
     const { state, dispatch } = useContext(CovidContext);
     const { dataType, displayDate, selectedBorough } = state;
     const [newCases, setNewCases] = useState(0);
@@ -155,6 +154,8 @@ function London(covidData) {
 
     useEffect(() => {
 	const svg = select(svgRef.current);
+	const { width, height } =
+	    dimensions || wrapperRef.current.getBoundingClientRect();
 	const colorScale = scaleLinear()
 	    .domain(domain)
 	    .range(["#B8ADA9", "#FFBD6F", "#990000" ]);
@@ -182,8 +183,8 @@ function London(covidData) {
 	};
 	const getY = () => {
 	    if (dataType === "new_cases")
-		return 130;
-	    return 280;
+		return height * 0.25;
+	    return height * 0.5;
 	};
 	// add color to the features
 	svg.selectAll(".borough")
@@ -229,7 +230,7 @@ function London(covidData) {
 	   .attr("class", "legend-title")
 	   .attr("x", 0)
 	   .attr("y", getY())
-	   .attr("font-size", 18)
+	   // .attr("font-size", 18)
 	   .text(getLegendTitle());
     }, [covidData, dataType, domain, transform]
     );

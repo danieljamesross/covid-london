@@ -32,11 +32,11 @@ function App() {
 
     const hideInfo = () => {
 	setInfo("info-hide");
-    }
+    };
     useEffect(() => {
 	if (selectedBorough)
 	    setInfo("info-hide");
-    },[selectedBorough])
+    },[selectedBorough]);
     
     const minDate = new Date("2020-01-30");
 
@@ -114,8 +114,10 @@ function App() {
     return (
 	<React.Fragment>
 	    <div className="App">
-		<h1>Covid in London</h1>
-		<h3>An interactive map of Covid-19 cases in London </h3>
+		<div className="header">
+		    <h1>Covid in London</h1>
+		    <h3>An interactive map of Covid-19 cases in London.</h3>
+		</div>
 		<CovidContext.Provider value={{state, dispatch}}>
 		    <div className="side-matter">
 			<button

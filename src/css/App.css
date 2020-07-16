@@ -5,9 +5,12 @@ body {
 }
 
 .App {
-    min-width: 800px;
+    /* min-width: 800px; */
+    max-width: 100%;
 }
-
+.header {
+    width: 100%;
+}
 .bold {
     font-weight: bold;
 }
@@ -19,8 +22,8 @@ svg {
     height: 100%;
 }
 
-map {
-    height: 800px;
+.map {
+    height: 500px;
 }
 
 svg .borough:hover {
@@ -32,28 +35,34 @@ svg .borough:hover {
     display: block;
     position: relative;
     left: 70%;
-    margin-left: 400px;
+    /* margin-left: 400px; */
     color: #B8ADA9;
-    font-size: 12pt;
+    font-size: 1vw;
 }
 
 .legend-title {
     font-weight: bold;
+    text-size: 1.5vw;
 }
 
 .date-slider {
-    padding:10px 100px;
-    position: absolute;
-    top:80%;
+    /* padding:10px 100px; */
+    /* position: absolute; */
+    top:0;
     width:80%;
+    margin: auto;
+	position: relative;
+	left:0;
+	top:80%;
 }
 .side-matter {
-    width:120px;
+    width:15%;
     position: absolute;
     display: block;
-    top: 1rem;
+    top: 2rem;
+    z-index:2;
     background-color: rgba(2, 55, 84, 0.7);
-    padding: 0px 20px 0px 20px;
+    padding: 0px 10px 0px 10px;
 }
 
 button {
@@ -61,11 +70,11 @@ button {
     text-transform: uppercase;
     border: none;
     padding: 8px;
-    font-size: 12pt;
+    font-size: 1.3vw;
     background-color: #77CFFF;
     position: relative;
     margin-bottom: 10px;
-    width: 130px;
+    min-width: 100%;
     display: block;
 }
 button:hover{
@@ -87,13 +96,13 @@ p {
 }
 
 ul,ol {
-    margin: -10px 0px 10px -20px;
+    /* margin: -10px 0px 10px -20px; */
     text-align: left;
 }
 
 .results {
     text-align: left;
-    font-size: 12pt;
+    font-size: 1vw;
     position: absolute;
     padding: 10px 20px 10px 20px;
     top:0;
@@ -107,7 +116,7 @@ ul,ol {
 }
 
 .results-borough {
-    font-size: 14pt;
+    font-size: 1.2vw;
     position: absolute;
     padding: 10px 20px 10px 20px;
     top: 0;
@@ -144,8 +153,8 @@ ul,ol {
     display: block;
     position: absolute;
     padding: 10px 20px;
-    width: 340px;
-    height: 300px;
+    width: 25%;
+    max-height: 50%;
     top: 0;
     left: 0;
     right: 0;
@@ -163,4 +172,63 @@ ul,ol {
 
 .noBlock {
     display: inline-block;
+}
+
+@media only screen and (max-width:620px) {
+    /* For mobile phones: */
+    .side-matter {
+	width: 100%;
+	position: sticky;
+	float: center;
+	top: 0;
+	margin: auto;
+	padding: 10px 0;
+    }
+    button {
+	max-width: 25%;
+	min-width: 20%;
+	margin: 0px 10px;
+	display: inline-block;
+    }
+    .results {
+	max-width: 25%;
+	min-width: 40%;
+	padding: 10px;
+	position: sticky;
+	top: 20%;
+	margin: 0px 10px;
+	display: inline-block;
+	margin: auto;
+	left: 0;
+	max-height:10%;
+	font-size: 2vw;
+    }
+    .date-slider {
+	padding:0;
+	margin: auto;
+	position: relative;
+	left:0;
+	top:80%;
+	width:80%;
+    }
+    .info {
+	width: 60%;
+	min-height: 100%;
+    }
+    .map {
+	width: 80%;
+	float: center;
+	margin:auto;
+	top: 0;
+	min-height: 100px;
+    }
+    .legend {
+	display: inline-block;
+	width: 20%;
+	height: 50%;
+    }
+  .map {
+      position: relative;
+      display: block;
+  }
 }
