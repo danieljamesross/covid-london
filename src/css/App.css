@@ -42,7 +42,7 @@ svg .borough:hover {
 }
 
 .date-slider {
-    padding:10px 100px;
+    margin: auto;
     position: absolute;
     top:80%;
     width:80%;
