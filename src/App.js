@@ -32,11 +32,11 @@ function App() {
 
     const hideInfo = () => {
 	setInfo("info-hide");
-    }
+    };
     useEffect(() => {
 	if (selectedBorough)
 	    setInfo("info-hide");
-    },[selectedBorough])
+    },[selectedBorough]);
     
     const minDate = new Date("2020-01-30");
 

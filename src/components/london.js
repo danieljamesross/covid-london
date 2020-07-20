@@ -18,7 +18,6 @@ function London(covidData) {
     const svgRef = useRef();
     const wrapperRef = useRef();
     const dimensions = useResizeObserver(wrapperRef);
-    // const [selectedBorough, setSelectedBorough] = useState(null);
     const { state, dispatch } = useContext(CovidContext);
     const { dataType, displayDate, selectedBorough } = state;
     const [newCases, setNewCases] = useState(0);
@@ -235,9 +234,7 @@ function London(covidData) {
     );
     return (
 	<>
-	    <div ref={wrapperRef}
-		 
-	    >
+	    <div ref={wrapperRef}>
 		<svg ref={svgRef}></svg>
 	    </div>
 	    <div className={margin}>

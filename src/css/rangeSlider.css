@@ -2,7 +2,9 @@
 * Rangeslider
 */
 .rangeslider {
-  margin: 20px 0;
+    margin: 20px auto;/* 20px 0; */
+    width: 100%;
+    left: 0;
   position: relative;
   background: #B8ADA9;
   -ms-touch-action: none;

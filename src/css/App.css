@@ -43,7 +43,7 @@ svg .borough:hover {
 
 .date-slider {
     margin: auto;
-    position: absolute;
+    position: relative;
     top:80%;
     width:80%;
 }
@@ -145,7 +145,7 @@ ul,ol {
     position: absolute;
     padding: 10px 20px;
     width: 340px;
-    height: 300px;
+    height: 360px;
     top: 0;
     left: 0;
     right: 0;
